@@ -2,17 +2,43 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { axios } from "axios";
+import Axios from "axios";
 import React from "react";
+import { toast } from "react-hot-toast";
 
 function LoginPage() {
+  const router = useRouter();
+
   const [user, setUser] = React.useState({
     password: "",
     email: "",
   });
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    if (user.password.length > 0 && user.email.length > 0) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
 
   const onLogin = async () => {
+    console.log("login");
     console.log(user);
+    try {
+      setLoading(true);
+      const res = await Axios.post("/api/user/login", user);
+      toast.success("Login Success");
+      console.log(res.data);
+      router.push("/profile");
+    } catch (err: any) {
+      console.log("error ", err.message);
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -32,7 +58,9 @@ function LoginPage() {
           flexDirection: "column",
         }}
       >
-        <h1 className="text-2xl text-center">login</h1>
+        <h1 className="text-2xl text-center">
+          {loading ? "Loading" : "Login"}
+        </h1>
         <label htmlFor="email">Email</label>
         <input
           type="email"
@@ -53,6 +81,7 @@ function LoginPage() {
         <button
           onClick={onLogin}
           className="rounded-full bg-blue-500 text-white p-1 hover:bg-blue-600"
+          disabled={buttonDisabled}
         >
           Login
         </button>
