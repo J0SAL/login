@@ -15,7 +15,11 @@ type UserProps = {
 function Profile() {
   const router = useRouter();
 
-  const [user, setUser] = React.useState<UserProps | null>(null);
+  const [user, setUser] = React.useState<UserProps>({
+    _id: "",
+    username: "",
+    email: "",
+  });
   const [loading, setLoading] = React.useState(false);
   const [profileLoading, setProfileLoading] = React.useState(true);
 
