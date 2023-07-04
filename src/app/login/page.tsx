@@ -50,7 +50,10 @@ function LoginPage() {
           className="form-control form-control-lg mb-3 w-100 px-3 py-2 rounded-3 border border-gray-400"
         />
 
-        <button onClick={onLogin} className="border">
+        <button
+          onClick={onLogin}
+          className="rounded-full bg-blue-500 text-white p-1 hover:bg-blue-600"
+        >
           Login
         </button>
         <Link href="/signup" className="mt-2 text-center underline">

@@ -2,18 +2,49 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { axios } from "axios";
+import Axios from "axios";
 import React from "react";
+import { toast } from "react-hot-toast";
 
 function SignupPage() {
+  const router = useRouter();
+
   const [user, setUser] = React.useState({
     username: "",
     password: "",
     email: "",
   });
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    if (
+      user.username.length > 0 &&
+      user.password.length > 0 &&
+      user.email.length > 0
+    ) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
+  }, [user]);
 
   const onSignup = async () => {
+    console.log("signup");
     console.log(user);
+    try {
+      setLoading(true);
+      const res = await Axios.post("/api/user/signup", user);
+      toast.success("Signup Success");
+      console.log(res.data);
+      toast.success("Login Success");
+      router.push("/login");
+    } catch (err: any) {
+      console.log("error ", err.message);
+      toast.error(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,7 +64,9 @@ function SignupPage() {
           flexDirection: "column",
         }}
       >
-        <h1 className="text-2xl text-center">signup</h1>
+        <h1 className="text-2xl text-center">
+          {loading ? "Processing" : "SignUp"}
+        </h1>
         <label htmlFor="username">UserName</label>
         <input
           type="text"
@@ -59,7 +92,11 @@ function SignupPage() {
           className="form-control form-control-lg mb-3 w-100 px-3 py-2 rounded-3 border border-gray-400"
         />
 
-        <button onClick={onSignup} className="border">
+        <button
+          onClick={onSignup}
+          className="rounded-full bg-blue-500 text-white p-1"
+          disabled={buttonDisabled}
+        >
           Signup
         </button>
         <Link href="/login" className="mt-2 text-center underline">

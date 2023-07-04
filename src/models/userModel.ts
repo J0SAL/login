@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
         required: [true, "Username is required!"],
     },
     password: {
-        type: Number,
+        type: String,
         required: [true, "Password is required!"],
     },
     email: {
@@ -35,4 +35,5 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-export const User = mongoose.models.users || mongoose.model("User", userSchema);
+const User = mongoose.models.users || mongoose.model("users", userSchema);
+export default User;
