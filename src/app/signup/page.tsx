@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Axios from "axios";
@@ -37,7 +35,6 @@ function SignupPage() {
       const res = await Axios.post("/api/user/signup", user);
       toast.success("Signup Success");
       console.log(res.data);
-      toast.success("Login Success");
       router.push("/login");
     } catch (err: any) {
       console.log("error ", err.message);
