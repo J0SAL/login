@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: [true, "Username is required!"],
     },
     password: {
         type: Number,
-        required: true,
+        required: [true, "Password is required!"],
     },
     email: {
         type: String,
-        required: true,
+        required: [true, "Email is required!"],
     },
     isAdmin: {
         type: Boolean,
@@ -35,6 +35,4 @@ const userSchema = new mongoose.Schema({
     },
 });
 
-const User = mongoose.models.users || mongoose.model("User", userSchema);
-
-export default User;
+export const User = mongoose.models.users || mongoose.model("User", userSchema);
