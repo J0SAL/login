@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
   if (!publicPath && token === "") {
     return NextResponse.redirect(new URL("/login", request.url));
   }
-  // TODO: Add logic to check if the token is expiredW
+  // TODO: Add logic to check if the token is expired
 }
 
 // See "Matching Paths" below to learn more

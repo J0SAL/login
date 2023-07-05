@@ -34,8 +34,8 @@ function LoginPage() {
       console.log(res.data);
       router.push("/profile");
     } catch (err: any) {
-      console.log("error ", err.message);
-      toast.error(err.message);
+      console.log("error ", err);
+      toast.error(err.response.data.message);
     } finally {
       setLoading(false);
     }
