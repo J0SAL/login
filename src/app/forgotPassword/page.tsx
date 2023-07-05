@@ -1,14 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Axios from "axios";
 import React from "react";
 import { toast } from "react-hot-toast";
 
 function ForgotPassowrd() {
-  const router = useRouter();
-
   const [user, setUser] = React.useState({
     email: "",
   });
