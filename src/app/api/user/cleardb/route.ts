@@ -9,6 +9,6 @@ export async function GET(req: NextRequest, res: NextResponse) {
         return NextResponse.redirect(new URL("/login", req.url))
     }
     catch(err){
-        console.log(err)
+        return NextResponse.json({message: err}, {status: 500})
     }
 }
