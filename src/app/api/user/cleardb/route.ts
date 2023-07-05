@@ -8,7 +8,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
         await User.deleteMany({})
         return NextResponse.redirect(new URL("/login", req.url))
     }
-    catch(err){
-        return NextResponse.json({message: err}, {status: 500})
+    catch(err: any){
+        return NextResponse.json({message: err.message}, {status: 500})
     }
 }
