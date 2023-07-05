@@ -42,7 +42,7 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
       from: "joy@mydomain.com",
       to: email,
       subject: subject,
-      html: `<p>Click <a href="${url}">here</a> to verify your email</p> or copy and paste this link in your browser: ${url}`,
+      html: `<p>Click <a href="${url}">here</a> to ${subject.toLocaleLowerCase()}</p> or copy and paste this link in your browser: ${url}`,
     };
 
     const mailResponse = transport.sendMail(mailOptions);
