@@ -4,7 +4,7 @@ import Axios from "axios";
 import React from "react";
 import { toast } from "react-hot-toast";
 
-function ForgotPassowrd() {
+function ForgotPassword() {
   const [user, setUser] = React.useState({
     email: "",
   });
@@ -76,4 +76,4 @@ function ForgotPassowrd() {
   );
 }
 
-export default ForgotPassowrd;
+export default ForgotPassword;
