@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Axios from "axios";
 import React from "react";
 import { toast } from "react-hot-toast";
+import GithubButton from "../components/buttons/GithubButton";
 
 function SignupPage() {
   const router = useRouter();
@@ -101,6 +102,7 @@ function SignupPage() {
         <Link href="/login" className="mt-2 text-center underline">
           login
         </Link>
+        <GithubButton />
       </div>
     </div>
   );
