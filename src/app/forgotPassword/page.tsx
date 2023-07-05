@@ -6,33 +6,31 @@ import Axios from "axios";
 import React from "react";
 import { toast } from "react-hot-toast";
 
-function LoginPage() {
+function ForgotPassowrd() {
   const router = useRouter();
 
   const [user, setUser] = React.useState({
-    password: "",
     email: "",
   });
   const [buttonDisabled, setButtonDisabled] = React.useState(true);
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
-    if (user.password.length > 0 && user.email.length > 0) {
+    if (user.email.length > 0) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
     }
   }, [user]);
 
-  const onLogin = async () => {
-    console.log("login");
+  const onSubmit = async () => {
+    console.log("submit");
     console.log(user);
     try {
       setLoading(true);
-      const res = await Axios.post("/api/user/login", user);
-      toast.success("Login Success");
-      console.log(res.data);
-      router.push("/profile");
+      const res = await Axios.post("/api/user/forgotpassword", user);
+      toast.success(res.data.message);
+      console.log(res);
     } catch (err: any) {
       console.log("error ", err);
       toast.error(err.response.data.message);
@@ -59,7 +57,7 @@ function LoginPage() {
         }}
       >
         <h1 className="text-2xl text-center">
-          {loading ? "Loading" : "Login"}
+          {loading ? "Loading" : "Fogot Password"}
         </h1>
         <label htmlFor="email">Email</label>
         <input
@@ -69,33 +67,17 @@ function LoginPage() {
           placeholder="email"
           className="form-control form-control-lg mb-3 w-100 px-3 py-2 rounded-3 border border-gray-400"
         />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-          placeholder="password"
-          className="form-control form-control-lg mb-3 w-100 px-3 py-2 rounded-3 border border-gray-400"
-        />
 
         <button
-          onClick={onLogin}
+          onClick={onSubmit}
           className="rounded-full bg-blue-500 text-white p-1 hover:bg-blue-600"
           disabled={buttonDisabled}
         >
-          Login
+          Submit
         </button>
-        <div className="text-end">
-          <Link className="underline text-sm" href="/forgotPassword">
-            forgot password?
-          </Link>
-        </div>
-        <Link href="/signup" className="mt-2 text-center underline">
-          signup
-        </Link>
       </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default ForgotPassowrd;
