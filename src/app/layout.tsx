@@ -16,10 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <div>
-        <Toaster />
-      </div>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <div>
+          <Toaster />
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
