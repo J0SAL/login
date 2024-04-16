@@ -3,6 +3,4 @@ services:
   my-app:
     image: j0sal/nextjs-13-login
     ports:
-      - "3001:3000"
-    env_file:
-      - .env
+      - "3000:3000"
